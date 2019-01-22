@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: 'Locadora de Jogos'
+  description: 'API para Locacao de Jogos'
+
+parameters:
+  codigo:
+    name: id
+    in: path
+    description: codigo do jogo
+    type: integer
+    format: int32
+    required: true
+
+paths:
+
+  /jogos:
+    get: 
+      summary: Obtem uma lista de Jogos
+      responses:
+        '200':
+          description: Jogos list response
+          content:
+           application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jogo'
+      security:
+          - OAuth2:
+            - read
+components:
+  schemas:
+    Jogo:
+      allOf:
+        - $ref: '#/components/schemas/NewJogo'
+        - required:
+          - codigo
+          properties:
+            codigo:
+              type: string  
+    NewJogo:
+      properties:
+        Id:
+          type: integer
+        Nome:
+          type: string
+        Genero:
+          type: string
+        Classificacao:
+          type: string
+      required:
+        - Nome
+        
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/CityGamer/CityGamer/1.0
