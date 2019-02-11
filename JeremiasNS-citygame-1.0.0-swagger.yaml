@@ -63,7 +63,22 @@ paths:
           - write
       
     put:
-      
+      summary: Altera dados de um jogo
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema: $ref: '#/components/schemas/Jogo'
+    responses:
+      '202':
+        description: Retorna a alteração
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Jogo'
+    security:
+      - OAuth2: 
+        - write
                
 components:
   schemas:
